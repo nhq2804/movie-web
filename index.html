@@ -1,25 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Web Xem Phim</title>
+  <title>Movie Web</title>
 
   <style>
+
     body{
-      background:black;
+      background:#111;
       color:white;
-      text-align:center;
       font-family:Arial;
-      margin-top:100px;
+      padding:20px;
     }
+
+    h1{
+      text-align:center;
+    }
+
+    .movies{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:20px;
+    }
+
+    .movie{
+      background:#222;
+      padding:10px;
+      border-radius:10px;
+    }
+
+    img{
+      width:100%;
+      border-radius:10px;
+    }
+
   </style>
 
 </head>
 
 <body>
 
-<h1>🎬 Web Xem Phim</h1>
+<h1>🎬 Movie Web</h1>
 
-<p>Website hoạt động thành công</p>
+<div class="movies" id="movies"></div>
+
+<script>
+
+const API_KEY = "2390f4463b1a88c18bc37147c2dcef61";
+
+fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`)
+.then(res => res.json())
+.then(data => {
+
+  const movies = document.getElementById("movies");
+
+  data.results.forEach(movie => {
+
+    movies.innerHTML += `
+
+      <div class="movie">
+
+        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}">
+
+        <h3>${movie.title}</h3>
+
+      </div>
+
+    `;
+
+  });
+
+});
+
+</script>
 
 </body>
 </html>
