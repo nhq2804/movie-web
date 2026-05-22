@@ -1,36 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Movie Web</title>
+  <title>Netflix Clone</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
     body{
       background:#111;
       color:white;
       font-family:Arial;
+    }
+
+    .navbar{
+      padding:20px;
+      font-size:25px;
+      font-weight:bold;
+      color:red;
+    }
+
+    .banner{
+      height:300px;
+      background:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200');
+      background-size:cover;
+      background-position:center;
+      display:flex;
+      align-items:end;
       padding:20px;
     }
 
-    h1{
-      text-align:center;
+    .banner h1{
+      font-size:40px;
     }
 
     .movies{
+      padding:20px;
       display:grid;
       grid-template-columns:repeat(2,1fr);
-      gap:20px;
+      gap:15px;
     }
 
     .movie{
-      background:#222;
-      padding:10px;
+      transition:0.3s;
+    }
+
+    .movie:hover{
+      transform:scale(1.05);
+    }
+
+    .movie img{
+      width:100%;
       border-radius:10px;
     }
 
-    img{
+    .movie h3{
+      margin-top:10px;
+      font-size:16px;
+    }
+
+    button{
+      margin-top:10px;
       width:100%;
-      border-radius:10px;
+      padding:10px;
+      border:none;
+      border-radius:5px;
+      background:red;
+      color:white;
+      font-weight:bold;
     }
 
   </style>
@@ -39,7 +82,13 @@
 
 <body>
 
-<h1>🎬 Movie Web</h1>
+<div class="navbar">
+  NETFLIX
+</div>
+
+<div class="banner">
+  <h1>🔥 Trending Movies</h1>
+</div>
 
 <div class="movies" id="movies"></div>
 
@@ -62,6 +111,13 @@ fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`)
         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}">
 
         <h3>${movie.title}</h3>
+
+        <a href="https://www.youtube.com/results?search_query=${movie.title}+trailer"
+        target="_blank">
+
+        <button>Xem Trailer</button>
+
+        </a>
 
       </div>
 
